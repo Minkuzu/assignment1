@@ -44,6 +44,7 @@ class ProductController extends Controller
             'desc' => 'required|string|max:255',
             'category_id' => 'required|exists:App\Models\Category,id'
         ]);
+        $input = $request->all();
         if ($image = $request->file('image')) 
         {
             $destinationPath = 'images/';
@@ -51,13 +52,7 @@ class ProductController extends Controller
             $image->move($destinationPath, $profileImage);
             $input['image'] = "$profileImage";
         }
-        Product::create([
-            'name'=>$request->name,
-            'image'=>$request->image,
-            'price'=>$request->price,
-            'desc'=>$request->desc,
-            'category_id'=>$request->category_id,
-        ]);
+        Product::create($input);
         return redirect()->route('products.index')->with('msg', 'Product Created Successfully');
     }
 
