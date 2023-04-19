@@ -1,4 +1,4 @@
-@extends('posts.app')
+@extends('products.app')
 @section('content')
     <div class="row">
         <a class="btn btn-primary" href="{{url('/')}}">Home</a>
@@ -18,7 +18,7 @@
         <tr>
             <td>{{$product->id}}</td>
             <td>{{$product->name}}</td>
-            <td>{{$product->image}}</td>
+            <td><img src="/images/{{$product->image}}" width="250px"></td>
             <td>{{$product->price}}</td>
             <td>{{$product->category->name}}</td>
             <td>{{$product->desc}}</td>

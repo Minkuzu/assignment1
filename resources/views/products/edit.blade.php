@@ -6,7 +6,7 @@
     <div class="row">
         <a class="btn btn-primary" href="{{url('/products')}}">Product Index</a>
     </div>
-    <form action="{{route('products.update',$product->id)}}" method="POST">
+    <form action="{{route('products.update',$product->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">
@@ -20,6 +20,7 @@
                 <div class="form-group">
                     <strong>Product's Image:</strong>
                     <input type="file" name="image" class="form-control" value="{{$product->image}}" placeholder="Image">
+                    <img src="/images/{{$product->image}}" width="250px">
                 </div>
             </div>
             <div class="col-md-12 col-sm-12">
@@ -39,7 +40,7 @@
                     <strong>Select Category:</strong>
                     <select name="category_id">
                         @foreach ($categories as $item)
-                            <option @selected($item->id == $post->category_id) 
+                            <option @selected($item->id == $product->category_id) 
                                 value="{{$item->id}}">{{$item->name}}</option>
                         @endforeach
                     </select>

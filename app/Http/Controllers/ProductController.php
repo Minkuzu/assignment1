@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::latest()->paginate(5);
-        return view('index',compact('products'));
+        return view('products.index',compact('products'));
     }
 
     /**
@@ -27,7 +27,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('posts.create', compact('categories'));
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -41,11 +41,9 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'price' => 'required',
             'desc' => 'required|string|max:255',
             'category_id' => 'required|exists:App\Models\Category,id'
         ]);
-        $input = $request -> all();
         if ($image = $request->file('image')) 
         {
             $destinationPath = 'images/';
@@ -53,8 +51,14 @@ class ProductController extends Controller
             $image->move($destinationPath, $profileImage);
             $input['image'] = "$profileImage";
         }
-        Post::create($input);
-        return redirect()->route('products.index')->with('msg', 'Post Created Successfully');
+        Product::create([
+            'name'=>$request->name,
+            'image'=>$request->image,
+            'price'=>$request->price,
+            'desc'=>$request->desc,
+            'category_id'=>$request->category_id,
+        ]);
+        return redirect()->route('products.index')->with('msg', 'Product Created Successfully');
     }
 
     /**
@@ -77,7 +81,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
-        return view('products.edit', compact('categories', 'products    '));
+        return view('products.edit', compact('categories', 'product'));
     }
 
     /**
@@ -92,7 +96,6 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'price' => 'required',
             'desc' => 'required|string|max:255',
             'category_id' => 'required|exists:App\Models\Category,id'
         ]);
@@ -119,6 +122,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('index')->with('ok','Product deleted');
+        return redirect()->route('products.index')->with('ok','Product deleted');
     }
 }

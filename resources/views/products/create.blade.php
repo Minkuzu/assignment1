@@ -6,7 +6,7 @@
     <div class="row">
         <a class="btn btn-primary" href="{{url('/products')}}">Product Index</a>
     </div>
-    <form action="{{route('products.store')}}" method="POST">
+    <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-12 col-sm-12">
@@ -18,13 +18,13 @@
             <div class="col-md-12 col-sm-12">
                 <div class="form-group">
                     <strong>Product's Image:</strong>
-                    <input type="text" name="image" class="form-control" placeholder="Image">
+                    <input type="file" name="image" class="form-control" placeholder="Image">
                 </div>
             </div>
             <div class="col-md-12 col-sm-12">
                 <div class="form-group">
                     <strong>Product's Price:</strong>
-                    <input type="file" name="price" class="form-control" placeholder="Price">
+                    <input type="text" name="price" class="form-control" placeholder="Price">
                 </div>
             </div>
             <div class="col-md-12 col-sm-12">
