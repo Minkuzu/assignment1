@@ -105,7 +105,7 @@ class ProductController extends Controller
             unset($input['image']);
         }
         $product->update($input);
-        return redirect()->route('products.index')->with('msg', 'Post Created Successfully');
+        return redirect()->route('products.index')->with('msg', 'Product Updated Successfully');
     }
 
     /**

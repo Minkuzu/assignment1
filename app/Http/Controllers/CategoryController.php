@@ -15,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::lastest()->paginate(5);
+        return view('categories.index',compact('categories'));
     }
 
     /**
@@ -25,7 +26,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -36,7 +38,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'desc' => 'required|string|max:255',
+        ]);
+        $input = $request->all();
+        Category::create($input);
+        return redirect()->route('categories.index')->with('msg', 'Category Created Successfully');
     }
 
     /**
@@ -47,7 +55,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('categories.show',compact('category'));
     }
 
     /**
@@ -58,7 +66,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $categories = Category::all();
+        return view('categories.edit', compact('categories'));
     }
 
     /**
@@ -70,7 +79,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'desc' => 'required|string|max:255',
+        ]);
+        $input = $request->all();
+        $category->update($input);
+        return redirect()->route('categories.index')->with('msg', 'Category Updated Successfully');
     }
 
     /**
@@ -81,6 +96,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index')->with('ok','Category deleted');
     }
 }
