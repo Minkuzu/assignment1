@@ -30,7 +30,7 @@
                                     <td>{{$prod->id}}</td>
                                     <td>{{$prod->name}}</td>
                                     <td><img src="/images/{{$prod->image}}" width="250px"></td>
-                                    <td>{{$prod->price}}</td>
+                                    <td>${{$prod->price}}</td>
                                     <td>{{$prod->category->name}}</td>
                                     <td>{{$prod->desc}}</td>
                                     <td>
@@ -52,5 +52,8 @@
             </div>
         </div>
     </div>
+</div>
+<div>
+    {{$products->links()}}
 </div>
 @endsection

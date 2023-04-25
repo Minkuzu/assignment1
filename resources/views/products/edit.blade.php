@@ -38,7 +38,7 @@
                         <strong>Product's Price:</strong>
                         <br>
                         <br>
-                        <input type="text" name="price" class="form-control" value="{{$product->price}}" placeholder="Price">
+                        <input type="text" name="price" class="form-control" value="{{$product->price}}$" placeholder="Price">
                         <br>
                     </div>
                 </div>
@@ -70,5 +70,5 @@
             </div>
         </form>
     </div>
-    
+</div>
 @endsection

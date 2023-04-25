@@ -18,7 +18,11 @@ class ProductController extends Controller
         $products = Product::latest()->paginate(5);
         return view('products.index',compact('products'));
     }
-
+    public function dashboard()
+    {
+        $products = Product::latest()->paginate(5);
+        return view('welcome',compact('products'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -118,5 +122,53 @@ class ProductController extends Controller
     {
         $product->delete();
         return redirect()->route('products.index')->with('ok','Product deleted');
+    }
+    public function search(){
+        $search_text = $_GET['search'];
+        $product = Product::where('name','LIKE', '%'.$search_text.'%')->with('category')->get();
+        return view('products.search',compact('product'));
+    }
+    public function cart()
+    {
+        return view('cart');
+    }
+    public function addToCart($id)
+    {
+        $product = Product::findOrFail($id);
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                "name" => $product->name,
+                "image" => $product->image,
+                "price" => $product->price,
+                "desc" => $product->desc,
+                "quantity" => 1
+
+            ];
+        }
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product Has Been Added To Cart');
+    }
+    public function updatecart(Request $request)
+    {
+        if ($request->id && $request->quatity) {
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('ok', 'cart  successfully');
+        }
+    }
+    public function remove(Request $request)
+    {
+        if ($request->id) {
+            $cart = session()->get('cart');
+            if (isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('ok', 'Product Has Been Removed From Cart');
+        }
     }
 }

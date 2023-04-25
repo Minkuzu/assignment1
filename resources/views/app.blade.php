@@ -19,9 +19,6 @@
                 <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{url('categories')}}">Categories</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
               </li>
             </ul>
@@ -32,8 +29,21 @@
           </div>
         </div>
       </nav>
-    <div class = "container">
-        @yield('content')
+      <br>
+    <div class="container d-flex flex-row-reverse">
+      <button type="button" class="btn btn-primary">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
+      </button>
+      <a href="{{ route('cart') }}" class="btn btn-primary btn-block">View all</a>
     </div>
+  <div class = "container">
+    @if(session('success'))
+        <div class="alert alert-success">
+          {{ session('success') }}
+        </div> 
+    @endif
+    @yield('content')
+  </div>
+@yield('scripts')
 </body>
 </html>

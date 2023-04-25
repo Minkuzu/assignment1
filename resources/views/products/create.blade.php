@@ -2,11 +2,11 @@
 @section('content')
 <div class="card" style="margin:20px;">
     <div class="card-header">
+        <h2>Create Product</h2>
         <a class="btn btn-primary" href="{{url('/')}}">Home</a>
         <a class="btn btn-primary" href="{{url('/products')}}">Product Index</a>
         <br>
         <br>
-        <h2>Create Product</h2>
     </div>
     <div class="card-body">
         <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">

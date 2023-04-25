@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::lastest()->paginate(5);
+        $categories = Category::all();
         return view('categories.index',compact('categories'));
     }
 
@@ -27,7 +27,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('products.create', compact('categories'));
+        return view('categories.create', compact('categories'));
     }
 
     /**
@@ -66,8 +66,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $categories = Category::all();
-        return view('categories.edit', compact('categories'));
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -96,6 +95,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $category->products()->delete();
         $category->delete();
         return redirect()->route('categories.index')->with('ok','Category deleted');
     }

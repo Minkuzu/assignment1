@@ -1,14 +1,15 @@
-@extends('categories.app')
+@extends('products.app')
 @section('content')
 <div class= "container">
     <div class= "row" style= "margin:20px;">
         <div class= "col-12">
             <div class= "card">
                 <div class= "card-header">
-                    <h2>Category Management</h2>
+                    <h2>Search Product</h2>
                 </div>
                 <div class="card-body">
-                    <a class="btn btn-success btn-sm" href="{{url('categories/create')}}">Create New Category</a>
+                    <a class="btn btn-success btn-sm" href="{{url('products/create')}}">Create New Product</a>
+                    <a class="btn btn-success btn-sm" href="{{url('products')}}">Product Index</a>
                     <br>
                     <br>
                     <div class="table-responsive">
@@ -17,22 +18,27 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Price</th>
+                                    <th>Category</th>
                                     <th>Description</th>
-                                    <th>Date Created</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $cat)
+                                @foreach ($product as $prod)
                                 <tr>
-                                    <td>{{$cat->id}}</td>
-                                    <td>{{$cat->name}}</td>
-                                    <td>{{$cat->desc}}</td>
-                                    <td>{{$cat->created_at->diffForHumans()}}</td>
+                                    <td>{{$prod->id}}</td>
+                                    <td>{{$prod->name}}</td>
+                                    <td><img src="/images/{{$prod->image}}" width="250px"></td>
+                                    <td>${{$prod->price}}</td>
+                                    <td>{{$prod->category->name}}</td>
+                                    <td>{{$prod->desc}}</td>
                                     <td>
-                                        <form action="{{route('categories.destroy',$cat->id)}}" method="POST">
-                                        <a class="btn btn-info" href="{{route('categories.show',$cat->id)}}">Detail</a>
-                                        <a class="btn btn-primary" href="{{route('categories.edit',$cat->id)}}">Edit</a>
+                                        <form action="{{route('products.destroy',$prod->id)}}" method="POST">
+                                        <a class="btn btn-info" href="{{route('products.show',$prod->id)}}">Detail</a>
+                                        <a class="btn btn-primary" href="{{route('products.edit',$prod->id)}}">Edit</a>
+                                    
                                         {{ method_field('DELETE') }}
                                         {{ csrf_field() }}
                                         <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
