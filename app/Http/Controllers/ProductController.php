@@ -151,13 +151,13 @@ class ProductController extends Controller
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Product Has Been Added To Cart');
     }
-    public function updatecart(Request $request)
+    public function updateCart(Request $request)
     {
-        if ($request->id && $request->quatity) {
+        if($request->id && $request->quantity){
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
-            session()->flash('ok', 'cart  successfully');
+            session()->flash('success', 'Cart successfully updated!');
         }
     }
     public function remove(Request $request)
@@ -168,7 +168,7 @@ class ProductController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('ok', 'Product Has Been Removed From Cart');
+            session()->flash('ok', 'cart removed!');
         }
     }
 }

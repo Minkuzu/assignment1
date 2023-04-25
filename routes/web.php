@@ -32,7 +32,7 @@ Route::get('/search','ProductController@search');
 Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add_to_cart');
 Route::get('cart', [ProductController::class, 'cart'])->name('cart');
 Route::delete('remove-from-cart', [ProductController::class, 'remove'])->name('remove_from_cart');
-Route::patch('update-cart', [ProductController::class, 'updatecart'])->name('update_cart');
+Route::patch('update-cart', [ProductController::class, 'updateCart'])->name('update_cart');
 
 Route::get('/create','CategoryController@create')->name('create');
 Route::post('store/','CategoryController@store')->name('store');

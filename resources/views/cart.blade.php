@@ -77,7 +77,6 @@
    
         var ele = $(this);
    
-        if(confirm("Do you really want to remove?")) {
             $.ajax({
                 url: '{{ route('remove_from_cart') }}',
                 method: "DELETE",
@@ -89,7 +88,6 @@
                     window.location.reload();
                 }
             });
-        }
     });
    
 </script>
