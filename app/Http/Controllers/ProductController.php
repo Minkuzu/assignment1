@@ -157,7 +157,7 @@ class ProductController extends Controller
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
-            session()->flash('success', 'Cart successfully updated!');
+            session()->flash('success', 'Cart Has Been Updated');
         }
     }
     public function remove(Request $request)
@@ -168,7 +168,7 @@ class ProductController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('ok', 'cart removed!');
+            session()->flash('success', 'Product Has Been Removed From Cart');
         }
     }
 }

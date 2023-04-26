@@ -2,7 +2,7 @@
 @section('content')
 <div class="card" style="margin:20px;">
     <div class="card-header">
-        <h2>Edit Product</h2>
+        <h2>Edit Category</h2>
         <br>
         <a class="btn btn-primary" href="{{url('/')}}">Home</a>
         <a class="btn btn-primary" href="{{url('/categories')}}">Category Index</a>
@@ -10,7 +10,6 @@
         <br>
     </div>
     <div class="card-body">
-
         <form action="{{route('categories.update',$category->id)}}" method="POST">
             @csrf
             @method('PUT')

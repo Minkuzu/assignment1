@@ -2,11 +2,12 @@
 @section('content')
 <div class="card" style="margin:20px;">
     <div class="card-header">
+        <h2>Edit Product</h2>
+        <br>
         <a class="btn btn-primary" href="{{url('/')}}">Home</a>
         <a class="btn btn-primary" href="{{url('/products')}}">Product Index</a>
         <br>
         <br>
-        <h2>Edit Product</h2>
     </div>
     <div class="card-body">
         <form action="{{route('products.update',$product->id)}}" method="POST" enctype="multipart/form-data">
@@ -27,7 +28,7 @@
                         <strong>Product's Image:</strong>
                         <br>
                         <br>
-                        <input type="file" name="image" class="form-control" value="{{$product->image}}" placeholder="Image">
+                        <input type="file" name="image" class="form-control" placeholder="Image">
                         <img src="/images/{{$product->image}}" width="250px">
                         <br>
                         <br>
@@ -38,7 +39,7 @@
                         <strong>Product's Price:</strong>
                         <br>
                         <br>
-                        <input type="text" name="price" class="form-control" value="{{$product->price}}$" placeholder="Price">
+                        <input type="text" name="price" class="form-control" value="{{$product->price}}" placeholder="Price">
                         <br>
                     </div>
                 </div>
