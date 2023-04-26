@@ -69,9 +69,6 @@
                 </div>
               </div>
           </div>
-          <div class="text-center checkout">
-              <a href="{{ route('cart') }}" class="btn btn-primary btn-block">View all</a>
-          </div>
       </div>
     </div>
   </div>
