@@ -10,10 +10,10 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
-    /**đfdfdfdsfsdf
+    /**
      * Define the model's default state.
      *
-     * @return dfdfarray
+     * @return array
      */
     public function definition()
     {
