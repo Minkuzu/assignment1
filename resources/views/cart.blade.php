@@ -18,7 +18,8 @@
                 <tr data-id="{{ $id }}">
                     <td data-th="Product">
                         <div class="row">
-                            <div class="col-sm-3 hidden-xs"><img src="{{ asset('images') }}/{{ $details['image'] }}" width="100" height="100" class="img-responsive"/></div>
+                            <div class="col-sm-3 hidden-xs">
+                                <img src="{{ asset('images') }}/{{ $details['image'] }}" width="100" height="100" class="img-responsive"/></div>
                             <div class="col-sm-9">
                                 <h4 class="nomargin">{{ $details['name'] }}</h4>
                             </div>
@@ -43,7 +44,11 @@
         <tr>
             <td colspan="5" class="text-right">
                 <a href="{{ url('/') }}" class="btn btn-danger"> <i class="fa fa-arrow-left"></i> Continue Shopping</a>
-                <button class="btn btn-success"><i class="fa fa-money"></i> Checkout</button>
+                {{-- <button class="btn btn-success"><i class="fa fa-money"></i> Checkout</button> --}}
+                <form action="{{url('/orders')}}" method="GET">
+                {{csrf_field()}}
+                <button type="submit" class="btn btn-success btn_check_out"><i class="fa fa-money"></i>Check Out</button>
+                </form>
             </td>
         </tr>
     </tfoot>
@@ -89,6 +94,22 @@
                 }
             });
     });
-   
+    $('.btn_check_out').click(function() {
+        $.ajax({
+            url: '/orders',
+            data: {
+                items: JSON.parse(localStorage.getItem("cart"))
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    alert('Check Out Successfully');
+                    window.location.href = '/';
+                } else {
+                     alert('Check Out Failed');
+                }
+            },
+        });
+    });
 </script>
 @endsection

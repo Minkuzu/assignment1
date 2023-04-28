@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +31,8 @@ Route::get('/','ProductController@dashboard')->name('index');
 // Route::put('edit/{product}','ProductController@index')->name('index');
 // Route::delete('/[product]','ProductController@destroy')->name('destroy');
 // Route::get('/search','ProductController@search');
-Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add_to_cart');
-Route::get('cart', [ProductController::class, 'cart'])->name('cart');
-Route::delete('remove-from-cart', [ProductController::class, 'remove'])->name('remove_from_cart');
-Route::patch('update-cart', [ProductController::class, 'updateCart'])->name('update_cart');
+// Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add_to_cart');
+// Route::get('cart', [ProductController::class, 'cart'])->name('cart');
 
 // Route::get('/create','CategoryController@create')->name('create');
 // Route::post('store/','CategoryController@store')->name('store');
@@ -40,6 +40,14 @@ Route::patch('update-cart', [ProductController::class, 'updateCart'])->name('upd
 // Route::get('edit/{category}','CategoryController@update')->name('update');
 // Route::put('edit/{category}','CategoryController@index')->name('index');
 // Route::delete('/[category]','CategoryController@destroy')->name('destroy');
+
+Route::get('cart',[CartController::class, 'cart'])->name('cart');
+Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add_to_cart');
+Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove_from_cart');
+Route::patch('update-cart', [CartController::class, 'update'])->name('update_cart');
+// Route::post('cart/{id}','CartController@store')->name('cart.store');
+
+Route::get('/orders', [OrderController::class, 'store'])->name('orders.store');
 
 Auth::routes();
 

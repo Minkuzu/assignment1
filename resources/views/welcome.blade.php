@@ -9,6 +9,9 @@
                     <p>You're logged in</p>
                 @else
                     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+                    {{-- @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                    @endif --}}
                 @endauth
             </div>
         </div>
@@ -47,7 +50,12 @@
                                     <td>{{$prod->desc}}</td>
                                     <td>
                                         <p class="btn-holder">
-                                            <a href="{{ route('add_to_cart', $prod->id) }}" class="btn btn-primary btn-block text-center" role="button">Add to cart</a> 
+                                            <a href="{{ route('add_to_cart', $prod->id) }}" class="btn btn-primary btn-block text-center" role="button">
+                                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>Add to cart</a> 
+                                            {{-- <form action="{{route('cart.store')}}" method="POST">
+                                            @csrf
+                                            <button type="submit">Add To Cart</button>
+                                            </form> --}}
                                         </p>
                                     </td>
                                     @endforeach
