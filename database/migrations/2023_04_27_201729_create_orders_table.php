@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('product_id')->constrainted();
             $table->integer('quantity');
             $table->decimal('subtotal',10,2);
+            $table->string('user_name')->nullable();
+            $table->string('user_email')->nullable();
             $table->timestamps();
         });
     }

@@ -6,33 +6,37 @@ use Illuminate\Http\Request;
 use App\Models\Checkout;
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
-            'items' => 'required|array',
-            'items.*.quantity' => 'required|numeric|min:1',
-            'items.*.price' => 'required|numeric|min:1',
-            'items.*.product_id' => 'required|integer|min:1',
+        if(!session()->get('cart')) return response()->json([
+            'error' => true,
+            'user_name' => Auth::user()->name ?? "[N/A]",
+            'user_email' => Auth::user()->email ?? "[N/A]",
         ]);
-        $items = $request->input('items');
+
+        $items = session()->get('cart');
         $total = 0;
         foreach ($items as $item) {
-            $total =  $total + ($item['quantity'] * $item['price']);
+            $total =  $total + (intval($item['quantity']) * floatval($item['price']));
         }
-        $checkout = new Checkout();
-        $checkout->Total = $total;
-        $checkout->save();
-        foreach ($items as $item) {
+
+        foreach ($items as $id => $item) {
             $order = new Order();
-            $order->product_id = $item['product_id'];
+            $order->product_id = $id;
             $order->quantity = $item['quantity'];
             $order->subtotal = $item['price'];
-            $checkout->orders()->save($order);
+            $order->grandtotal = $total;
+            $order->user_name = Auth::user()->name ?? "[N/A]";
+            $order->user_email = Auth::user()->email ?? "[N/A]";
+            $order->save();
         }
+
         $request->session()->forget('cart');
+
         return response()->json([
             'success' => true
         ]);

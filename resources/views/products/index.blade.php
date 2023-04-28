@@ -25,6 +25,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            @if (!empty($products) && count($products) > 0)
                                 @foreach ($products as $prod)
                                 <tr>
                                     <td>{{$prod->id}}</td>
@@ -37,14 +38,24 @@
                                         <form action="{{route('products.destroy',$prod->id)}}" method="POST">
                                         <a class="btn btn-info" href="{{route('products.show',$prod->id)}}">Detail</a>
                                         <a class="btn btn-primary" href="{{route('products.edit',$prod->id)}}">Edit</a>
-                                    
+
                                         {{ method_field('DELETE') }}
                                         {{ csrf_field() }}
                                         <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
                                         </form>
                                     </td>
-                                    @endforeach
                                 </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="6">
+                                        <h2 class="text-center">
+                                            No data !
+                                        </h2>
+                                    </td>
+                                </tr>
+                            @endif
+
                             </tbody>
                         </table>
                     </div>

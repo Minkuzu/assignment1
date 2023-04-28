@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $table = 'orders';
-    protected $fillable = ['product_id', 'quantity', 'subtotal', 'order_id'];
+    protected $fillable = ['product_id', 'quantity', 'subtotal', 'order_id', 'grandtotal'];
 
     public function checkout()
     {

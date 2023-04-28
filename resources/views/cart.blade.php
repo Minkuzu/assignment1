@@ -57,18 +57,18 @@
 
 @section('scripts')
 <script type="text/javascript">
-   
+
     $(".cart_update").change(function (e) {
         e.preventDefault();
-   
+
         var ele = $(this);
-   
+
         $.ajax({
             url: '{{ route('update_cart') }}',
             method: "patch",
             data: {
-                _token: '{{ csrf_token() }}', 
-                id: ele.parents("tr").attr("data-id"), 
+                _token: '{{ csrf_token() }}',
+                id: ele.parents("tr").attr("data-id"),
                 quantity: ele.parents("tr").find(".quantity").val()
             },
             success: function (response) {
@@ -76,17 +76,17 @@
             }
         });
     });
-   
+
     $(".cart_remove").click(function (e) {
         e.preventDefault();
-   
+
         var ele = $(this);
-   
+
             $.ajax({
                 url: '{{ route('remove_from_cart') }}',
                 method: "DELETE",
                 data: {
-                    _token: '{{ csrf_token() }}', 
+                    _token: '{{ csrf_token() }}',
                     id: ele.parents("tr").attr("data-id")
                 },
                 success: function (response) {
@@ -94,19 +94,19 @@
                 }
             });
     });
-    $('.btn_check_out').click(function() {
+    $('.btn_check_out').click(function(e) {
+        e.preventDefault();
         $.ajax({
             url: '/orders',
-            data: {
-                items: JSON.parse(localStorage.getItem("cart"))
-            },
+            data: {},
             dataType: 'json',
             success: function(response) {
+
                 if (response.success) {
                     alert('Check Out Successfully');
                     window.location.href = '/';
                 } else {
-                     alert('Check Out Failed');
+                    alert('Check Out Failed');
                 }
             },
         });
