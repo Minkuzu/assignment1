@@ -58,7 +58,7 @@ CREATE TABLE `failed_jobs` (
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- fdfdf--------------------------------------------------------
+-- --------------------------------------------------------
 
 --
 -- Cấu trúc bảng cho bảng `migrations`
