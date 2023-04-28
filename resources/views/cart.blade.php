@@ -103,10 +103,10 @@
             success: function(response) {
 
                 if (response.success) {
-                    alert('Check Out Successfully');
+                    alert('Check Out Successfully!');
                     window.location.href = '/';
                 } else {
-                    alert('Check Out Failed');
+                    alert('Check Out Failed!');
                 }
             },
         });
