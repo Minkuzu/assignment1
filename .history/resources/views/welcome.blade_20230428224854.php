@@ -55,7 +55,7 @@
                                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>Add to cart</a> 
                                             {{-- <form action="{{route('cart.store')}}" method="POST">
                                             @csrf
-                                            <button type="submit">Add To Cart!</button>
+                                            <button type="submit">Add To Cart<!/button>
                                             </form> --}}
                                         </p>
                                     </td>
