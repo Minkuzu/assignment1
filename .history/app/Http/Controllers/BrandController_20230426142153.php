@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-    /**dfdfdfdf
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

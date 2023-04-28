@@ -14,7 +14,6 @@
                     @endif --}}
                 @endauth
             </div>
-            
         </div>
         @endif
     </div>
