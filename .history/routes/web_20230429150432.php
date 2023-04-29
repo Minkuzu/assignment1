@@ -90,7 +90,7 @@ Route::get('/dashboard', function () {
     Route::get('edit/{category}','CategoryController@update')->name('update');
     Route::put('edit/{category}','CategoryController@index')->name('index');
     Route::delete('/[category]','CategoryController@destroy')->name('destroy');
-//});
+});
 
 
 // Auth::routes();

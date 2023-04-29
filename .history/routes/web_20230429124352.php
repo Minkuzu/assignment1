@@ -38,9 +38,7 @@ use App\Http\Controllers\OrderController;
 // Route::get('edit/{category}','CategoryController@update')->name('update');
 // Route::put('edit/{category}','CategoryController@index')->name('index');
 // Route::delete('/[category]','CategoryController@destroy')->name('destroy');
-Route::resource('products',ProductController::class);
-Route::resource('categories',CategoryController::class);
-Route::get('/','ProductController@dashboard')->name('index');
+
 Route::get('cart',[CartController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add_to_cart');
 Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove_from_cart');
@@ -69,7 +67,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-//Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::resource('products',ProductController::class);
     Route::resource('categories',CategoryController::class);
     Route::resource('profile',ProfileController::class);
@@ -90,7 +88,7 @@ Route::get('/dashboard', function () {
     Route::get('edit/{category}','CategoryController@update')->name('update');
     Route::put('edit/{category}','CategoryController@index')->name('index');
     Route::delete('/[category]','CategoryController@destroy')->name('destroy');
-//});
+});
 
 
 // Auth::routes();

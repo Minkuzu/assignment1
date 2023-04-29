@@ -69,7 +69,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-//Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::resource('products',ProductController::class);
     Route::resource('categories',CategoryController::class);
     Route::resource('profile',ProfileController::class);
@@ -90,7 +90,7 @@ Route::get('/dashboard', function () {
     Route::get('edit/{category}','CategoryController@update')->name('update');
     Route::put('edit/{category}','CategoryController@index')->name('index');
     Route::delete('/[category]','CategoryController@destroy')->name('destroy');
-//});
+});
 
 
 // Auth::routes();
