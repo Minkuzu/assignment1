@@ -84,6 +84,6 @@ class CartController extends Controller
         session()->put('cart', $cart);
         $input = $request->all();
         Cart::create($input);
-        return redirect()->back()->with('success', 'Product Has Been Added To Cart');
+        return redirect()->back()->with('Success', 'Product Has Been Added To Cart');
     }
 }
