@@ -168,7 +168,7 @@ class ProductController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'Product Has Been Removed From Cart');
+            session()->flash('Success', 'Product Has Been Removed From Cart');
         }
     }
 }
