@@ -7,18 +7,20 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-    /**
+    /**dfdfdfdf
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $brands = Category::all();
+        return view('brands.index',compact('brands'));
     }
 
     /**
      * Show the form for creating a new resource.
+     * dfdfdf
      *
      * @return \Illuminate\Http\Response
      */

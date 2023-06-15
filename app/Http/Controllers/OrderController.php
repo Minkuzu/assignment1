@@ -38,7 +38,7 @@ class OrderController extends Controller
         $request->session()->forget('cart');
 
         return response()->json([
-            'success' => true
+            'Success' => true
         ]);
     }
 }
