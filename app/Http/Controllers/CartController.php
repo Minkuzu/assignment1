@@ -62,28 +62,4 @@ class CartController extends Controller
             session()->flash('success', 'Product Has Been Removed From Cart');
         }
     }
-    public function store(Request $request,$id)
-    {
-        // $cart = new Cart();
-        // $cart->name = $request->input('name');
-        // $cart->image = $request->input('image');
-        // $cart->price = $request->input('price');
-        // $cart->save();
-        $cart = session()->get('cart', []);
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-        } else {
-            $cart[$id] = [
-                "name" => $request->name,
-                "image" => $request->image,
-                "price" => $request->price,
-                "desc" => $request->desc,
-                "quantity" => 1
-            ];
-        }
-        session()->put('cart', $cart);
-        $input = $request->all();
-        Cart::create($input);
-        return redirect()->back()->with('Success', 'Product Has Been Added To Cart');
-    }
 }
